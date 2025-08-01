@@ -1,8 +1,12 @@
 import streamlit as st
 import openai 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def run_chatbot():
-    openai.api_key = "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"
+    groq_key = os.getenv("GROQ_API_KEY")
     openai.api_base = "https://api.groq.com/openai/v1"
    
 
