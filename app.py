@@ -94,7 +94,7 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
-    st.markdown("<h2 style='text-align: center;'>🔐 Welcome to <span style='color:red;'>MovieFlix</span></h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>🎬 Welcome to <span style='color:red;'>MovieFlix</span></h2>", unsafe_allow_html=True)
     st.write("---")
 
     # Create 3 columns to center the form
