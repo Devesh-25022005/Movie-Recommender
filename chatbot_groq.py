@@ -8,6 +8,7 @@ load_dotenv()
 def run_chatbot():
     groq_key = os.getenv("GROQ_API_KEY")
     openai.api_base = "https://api.groq.com/openai/v1"
+    openai.api_key = groq_key 
    
 
     if "chat_history" not in st.session_state:
