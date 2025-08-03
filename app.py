@@ -94,7 +94,7 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 if not st.session_state.logged_in:
-    st.markdown("<h2 style='text-align: center;'>🎬 Welcome to <span style='color:red;'>MovieFlix</span></h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>🎬 Welcome to <span style='color:red;'>Movie_Mitra</span></h2>", unsafe_allow_html=True)
     st.write("---")
 
     # Create 3 columns to center the form
@@ -200,7 +200,7 @@ def get_movies_by_emotion(mood, count=5):
 
 # Streamlit App
 st.set_page_config(page_title="Movie Recommender", layout="wide")
-st.markdown("<h2 style='text-align: center;'>🎬 Welcome to <span style='color:red;'>MovieFlix</span></h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>🎬 Welcome to <span style='color:red;'>Movie_Mitra</span></h2>", unsafe_allow_html=True)
 
 
 # Tabs 
@@ -406,20 +406,20 @@ if st.session_state.logged_in:
 
     # Full page chatbot mode
     if st.session_state.show_chatbot_full:
-        st.markdown("<h2 style='text-align: center;'>🤖 MovieBot Assistant</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center;'>🤖 Movie_Mitra Bot </h2>", unsafe_allow_html=True)
         
         # Center the chatbot on full page
         col1, col2, col3 = st.columns([1, 4, 1])
         with col2:
             run_chatbot()
             st.markdown(" ")
-            if st.button("🔙 Back to MovieFlix"):
+            if st.button("🔙 Back to Movie_Mitra"):
                 st.session_state.show_chatbot_full = False
                 st.rerun()
 
     else:
         # Default UI — chatbot button on main app
-        if st.button("💬 Open MovieBot"):
+        if st.button("💬 Open Movie_Mitra Bot"):
             st.session_state.show_chatbot_full = True
             st.rerun()
 

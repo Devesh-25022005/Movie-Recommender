@@ -1,38 +1,40 @@
 import streamlit as st
-import openai 
+import openai
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
+openai.api_base = "https://openrouter.ai/api/v1"
+openai.api_key = os.getenv("OPEN_ROUTER_API_KEY")
+
+FREE_MODELS = {
+    "DeepSeek R1": "deepseek/deepseek-r1:free",
+    "DeepSeek R1‑0528": "deepseek/deepseek-r1-0528:free",
+    "DeepSeek V3‑0324": "deepseek/deepseek-v3-0324:free",
+    "GLM 4.5 Air": "z-ai/glm-4.5-air:free",
+}
 
 def run_chatbot():
-    groq_key = os.getenv("GROQ_API_KEY")
-    openai.api_base = "https://api.groq.com/openai/v1"
-    openai.api_key = groq_key 
-   
+    model_name = st.selectbox("Choose a free model", list(FREE_MODELS.keys()))
+    model_id = FREE_MODELS[model_name]
 
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = []
-    
-    user_input = st.chat_input("Ask about any movie")
+    if "history" not in st.session_state:
+        st.session_state.history = []
 
+    user_input = st.chat_input("Ask anything about movies")
     if user_input:
-        st.session_state.chat_history.append({"role":"user", "content": user_input})
-        with st.spinner("Thinking..."):
-         response= openai.ChatCompletion.create(
-             model="llama3-8b-8192",
-             messages = [
-                {"role":"user", "content": user_input},
-                {"role":"system", "content":"You are a helpful and knowledgeable movie expert."},
-                *st.session_state.chat_history
+        st.session_state.history.append({"role": "user", "content": user_input})
+        with st.spinner("Generating response..."):
+            resp = openai.ChatCompletion.create(
+                model=model_id,
+                messages=[{"role": "system", "content": "You are a friendly and knowledgeable movie expert."},
+                          *st.session_state.history],
+                max_tokens=1000,
+                temperature=0.7,
+            )
+        reply = resp.choices[0].message.content
+        st.session_state.history.append({"role": "assistant", "content": reply})
 
-             ],
-             max_tokens= 500,
-             temperature = 0.7
-         )
-         reply = response.choices[0].message.content
-         st.session_state.chat_history.append({"role":"assistant", "content": reply})
-
-    for msg in st.session_state.chat_history:
+    for msg in st.session_state.history:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
