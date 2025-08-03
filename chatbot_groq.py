@@ -10,7 +10,6 @@ openai.api_key = st.secrets["OPEN_ROUTER_API_KEY"]
 FREE_MODELS = {
     "DeepSeek R1": "deepseek/deepseek-r1:free",
     "DeepSeek R1‑0528": "deepseek/deepseek-r1-0528:free",
-    "DeepSeek V3‑0324": "deepseek/deepseek-v3-0324:free",
     "GLM 4.5 Air": "z-ai/glm-4.5-air:free",
 }
 
