@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 openai.api_base = "https://openrouter.ai/api/v1"
-openai.api_key = os.getenv("OPEN_ROUTER_API_KEY")
+openai.api_key = st.secrets["OPEN_ROUTER_API_KEY"]
 
 FREE_MODELS = {
     "DeepSeek R1": "deepseek/deepseek-r1:free",
